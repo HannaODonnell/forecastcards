@@ -98,8 +98,8 @@ class Cardset:
                                    dtype={'obs_value':float},
                                    usecols=["start_time", "end_time"])
                     df['end_time']=df['end_time'].apply(lambda x: '23:59:59' if x in ['24:00:00','24:00'] else x)
-                    df['start_time']= pd.to_datetime(df['start_time'], infer_datetime_format=True)
-                    df['end_time']= pd.to_datetime(df['end_time'], infer_datetime_format=True)
+                    df['start_time']= pd.to_datetime(df['start_time'])
+                    df['end_time']= pd.to_datetime(df['end_time'])
                     df['invalid']=df['start_time']>=df['end_time']
                     if df['invalid'].sum()>0:
                         valid = False
