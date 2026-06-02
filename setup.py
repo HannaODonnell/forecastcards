@@ -23,7 +23,7 @@ nb_files      = package_files('forecastcards/notebooks')
 print("EXAMPLE FILES",example_files)
 
 requirements = [
-    'pandas==0.22',
+    'pandas',
     'requests',
     'goodtables',
     'tableschema',
