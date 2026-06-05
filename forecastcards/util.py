@@ -31,7 +31,7 @@ def github_url_to_dict(gh_url):
     gh_dict['repository'] = g[2]
     gh_dict['branch'] = g[4]
     gh_dict['subdir'] = ''
-    if len(g)>4:
+    if len(g)>5:
         gh_dict['subdir']='/'.join(g[5:])
     return gh_dict
 
