@@ -53,7 +53,6 @@ class Dataset:
             [pd.read_csv(
                 f,
                 parse_dates=['year_open_planned','year_horizon','date_open_actual'],
-                infer_datetime_format=True,
                 ) for f in card_locs_by_type["project"]
             ],
             ignore_index=True,
@@ -63,7 +62,6 @@ class Dataset:
             [pd.read_csv(
                 f,
                 parse_dates=['forecast_creation_date','scenario_date'],
-                infer_datetime_format=True,
                 ) for f in card_locs_by_type["scenario"]
             ],
             ignore_index=True,
