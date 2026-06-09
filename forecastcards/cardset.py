@@ -94,17 +94,17 @@ class Cardset:
 
                 # check that start time is before end time
                 if card_type in ['forecast','observations']:
-                    df=pd.read_csv(card,
-                                   dtype={'obs_value':float},
-                                   usecols=["start_time", "end_time"])
-                    df['end_time']=df['end_time'].apply(lambda x: '23:59:59' if x in ['24:00:00','24:00'] else x)
-                    df['start_time'] = pd.to_datetime(df['start_time'])
-                    df['end_time']   = pd.to_datetime(df['end_time'])
-                    df['invalid']=df['start_time']>=df['end_time']
-                    if df['invalid'].sum()>0:
-                        valid = False
-                        report = card+ " - Start time isn't before end time."+str(df[df['invalid'] == True])
-                        fail_reports.append(report)
+                    df = pd.read_csv(card, dtype={'obs_value': float})
+                    if 'start_time' in df.columns and 'end_time' in df.columns:
+                        df = df[["start_time", "end_time"]]
+                        df['end_time']=df['end_time'].apply(lambda x: '23:59:59' if x in ['24:00:00','24:00'] else x)
+                        df['start_time'] = pd.to_datetime(df['start_time'])
+                        df['end_time']   = pd.to_datetime(df['end_time'])
+                        df['invalid']=df['start_time']>=df['end_time']
+                        if df['invalid'].sum()>0:
+                            valid = False
+                            report = card+ " - Start time isn't before end time."+str(df[df['invalid'] == True])
+                            fail_reports.append(report)
 
         return valid, fail_reports
 
